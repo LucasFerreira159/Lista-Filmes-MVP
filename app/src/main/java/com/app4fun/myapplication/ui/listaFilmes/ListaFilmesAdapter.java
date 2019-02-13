@@ -19,9 +19,11 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
 
 
     private List<Filme> filmes;
+    private ItemFilmeClickListener itemFilmeClickListener;
 
-    public ListaFilmesAdapter() {
+    public ListaFilmesAdapter(ItemFilmeClickListener itemFilmeClickListener) {
         filmes = new ArrayList<>();
+        this.itemFilmeClickListener = itemFilmeClickListener;
     }
 
     @NonNull
@@ -46,14 +48,25 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
 
         TextView titulo;
         ImageView capa;
+        Filme filme;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             capa = itemView.findViewById(R.id.capa_filme);
             titulo = itemView.findViewById(R.id.text_filme);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(itemFilmeClickListener != null){
+                        itemFilmeClickListener.onItemFilmeClick(filme);
+                    }
+                }
+            });
         }
 
         public void bind(Filme filme){
+            this.filme = filme;
             titulo.setText(filme.getTitulo());
             Picasso.get().load("https://image.tmdb.org/t/p/w500/" + filme.getCapaFilme()).into(capa);
         }
@@ -64,4 +77,7 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
         notifyDataSetChanged();
     }
 
+    public interface ItemFilmeClickListener{
+        void onItemFilmeClick(Filme filme);
+    }
 }

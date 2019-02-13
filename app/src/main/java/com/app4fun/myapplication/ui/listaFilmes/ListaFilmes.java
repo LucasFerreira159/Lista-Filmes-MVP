@@ -1,6 +1,7 @@
 package com.app4fun.myapplication.ui.listaFilmes;
 
 import android.app.TaskStackBuilder;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,7 @@ import com.app4fun.myapplication.data.mapper.FilmeMapper;
 import com.app4fun.myapplication.data.model.Filme;
 import com.app4fun.myapplication.data.network.ApiService;
 import com.app4fun.myapplication.data.network.response.FilmesResult;
+import com.app4fun.myapplication.ui.detalhesFilme.DetalheFilme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListaFilmes extends AppCompatActivity implements ListaFilmesContrato.ListaFilmeView {
+public class ListaFilmes
+        extends AppCompatActivity
+        implements ListaFilmesContrato.ListaFilmeView,
+        ListaFilmesAdapter.ItemFilmeClickListener {
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
@@ -46,12 +51,12 @@ public class ListaFilmes extends AppCompatActivity implements ListaFilmesContrat
     public void configuraToolbar() {
         toolbar = findViewById(R.id.toolbar);
 
-        toolbar.setTitle("Filmes");
+        toolbar.setTitle("Filmes Populares");
         setSupportActionBar(toolbar);
     }
 
     public void configuraAdapter(){
-        adapter = new ListaFilmesAdapter();
+        adapter = new ListaFilmesAdapter(this);
 
         recyclerView = findViewById(R.id.lista_filmes);
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -75,5 +80,12 @@ public class ListaFilmes extends AppCompatActivity implements ListaFilmesContrat
     protected void onDestroy() {
         super.onDestroy();
         presenter.destroirView();
+    }
+
+    @Override
+    public void onItemFilmeClick(Filme filme) {
+        Intent intent = new Intent(this, DetalheFilme.class);
+        intent.putExtra("filme", filme);
+        startActivity(intent);
     }
 }

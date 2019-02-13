@@ -1,6 +1,8 @@
 package com.app4fun.myapplication.data.model;
 
-public class Filme {
+import java.io.Serializable;
+
+public class Filme implements Serializable {
 
     private String titulo;
     private String capaFilme;
