@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListaFilmes extends AppCompatActivity {
+public class ListaFilmes extends AppCompatActivity implements ListaFilmesContrato.ListaFilmeView {
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
@@ -30,7 +30,7 @@ public class ListaFilmes extends AppCompatActivity {
     private List<Filme> filmes = new ArrayList<>();
 
     private ListaFilmesAdapter adapter;
-
+    private ListaFilmesContrato.ListaFilmePresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,9 @@ public class ListaFilmes extends AppCompatActivity {
 
         configuraToolbar();
         configuraAdapter();
-        obtemFilmes();
+
+        presenter = new ListaFilmesPresenter(this);
+        presenter.obtemFilmes();
     }
 
     public void configuraToolbar() {
@@ -58,28 +60,20 @@ public class ListaFilmes extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void obtemFilmes(){
-        ApiService.getInstance().recuperarFilmes(getString(R.string.chave_api_the_movies_db))
-                .enqueue(new Callback<FilmesResult>() {
-                    @Override
-                    public void onResponse(Call<FilmesResult> call, Response<FilmesResult> response) {
-                        if (response.isSuccessful()) {
-                            final List<Filme> filmes = FilmeMapper
-                                    .deResponseParaDominio(response.body().getRestultadoFilmes());
-                            adapter.setFilmes(filmes);
-                        }else{
-                            mostraErro();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<FilmesResult> call, Throwable t) {
-                        mostraErro();
-                    }
-                });
+    @Override
+    public void mostraFilmes(List<Filme> filmes) {
+        adapter.setFilmes(filmes);
     }
 
+    @Override
     public void mostraErro(){
         Toast.makeText(this, "Erro ao obter Dados", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.destroirView();
     }
 }

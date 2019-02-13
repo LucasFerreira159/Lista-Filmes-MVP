@@ -4,10 +4,14 @@ public class Filme {
 
     private String titulo;
     private String capaFilme;
+    private String sinopse;
+    private String capaDetalhe;
 
-    public Filme(String nome, String capaFilme) {
-        this.titulo = nome;
+    public Filme(String titulo, String capaFilme, String sinopse, String capaDetalhe) {
+        this.titulo = titulo;
         this.capaFilme = capaFilme;
+        this.sinopse = sinopse;
+        this.capaDetalhe = capaDetalhe;
     }
 
     public String getCapaFilme() {
@@ -18,4 +22,11 @@ public class Filme {
         return titulo;
     }
 
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public String getCapaDetalhe() {
+        return capaDetalhe;
+    }
 }
