@@ -3,6 +3,7 @@ package com.app4fun.myapplication.ui.listaFilmes;
 import android.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -51,8 +52,8 @@ public class ListaFilmes extends AppCompatActivity {
         adapter = new ListaFilmesAdapter();
 
         recyclerView = findViewById(R.id.lista_filmes);
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }

@@ -3,7 +3,7 @@ package com.app4fun.myapplication.data.network.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FilmesResponse {
+public class FilmeResponse {
 
     @SerializedName("poster_path")
     @Expose
@@ -14,7 +14,7 @@ public class FilmesResponse {
     @Expose
     private final String tituloOriginal;
 
-    public FilmesResponse(String caminhoPoster, String tituloOriginal) {
+    public FilmeResponse(String caminhoPoster, String tituloOriginal) {
         this.caminhoPoster = caminhoPoster;
         this.tituloOriginal = tituloOriginal;
     }

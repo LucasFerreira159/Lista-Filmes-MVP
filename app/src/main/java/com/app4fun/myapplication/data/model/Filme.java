@@ -2,17 +2,20 @@ package com.app4fun.myapplication.data.model;
 
 public class Filme {
 
-    private String nome;
+    private String titulo;
+    private String capaFilme;
 
-    public Filme(String nome) {
-        this.nome = nome;
+    public Filme(String nome, String capaFilme) {
+        this.titulo = nome;
+        this.capaFilme = capaFilme;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCapaFilme() {
+        return capaFilme;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getTitulo() {
+        return titulo;
     }
+
 }

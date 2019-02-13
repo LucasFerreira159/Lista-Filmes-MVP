@@ -9,13 +9,13 @@ public class FilmesResult {
 
     @SerializedName("results")
     @Expose
-    private final List<FilmesResponse> restultadoFilmes;
+    private final List<FilmeResponse> restultadoFilmes;
 
-    public FilmesResult(List<FilmesResponse> restultadoFilmes) {
+    public FilmesResult(List<FilmeResponse> restultadoFilmes) {
         this.restultadoFilmes = restultadoFilmes;
     }
 
-    public List<FilmesResponse> getRestultadoFilmes() {
+    public List<FilmeResponse> getRestultadoFilmes() {
         return restultadoFilmes;
     }
 }

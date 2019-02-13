@@ -1,20 +1,19 @@
 package com.app4fun.myapplication.ui.listaFilmes;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app4fun.myapplication.R;
 import com.app4fun.myapplication.data.model.Filme;
-import com.app4fun.myapplication.data.network.response.FilmesResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.MyViewHolder> {
 
@@ -35,7 +34,7 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.titulo.setText(filmes.get(i).getNome());
+        myViewHolder.bind(filmes.get(i));
     }
 
     @Override
@@ -46,10 +45,17 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView titulo;
+        ImageView capa;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            capa = itemView.findViewById(R.id.capa_filme);
             titulo = itemView.findViewById(R.id.text_filme);
+        }
+
+        public void bind(Filme filme){
+            titulo.setText(filme.getTitulo());
+            Picasso.get().load("https://image.tmdb.org/t/p/w500/" + filme.getCapaFilme()).into(capa);
         }
     }
 
