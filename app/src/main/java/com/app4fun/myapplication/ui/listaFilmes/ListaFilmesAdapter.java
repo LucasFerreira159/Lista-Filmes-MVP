@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.app4fun.myapplication.R;
 import com.app4fun.myapplication.data.model.Filme;
+import com.app4fun.myapplication.data.network.response.FilmesResponse;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -17,9 +18,9 @@ import java.util.zip.Inflater;
 public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.MyViewHolder> {
 
     private Context context;
-    private List<Filme> filmes;
+    private List<FilmesResponse> filmes;
 
-    public ListaFilmesAdapter(Context context, List<Filme> filmes) {
+    public ListaFilmesAdapter(Context context, List<FilmesResponse> filmes) {
         this.context = context;
         this.filmes = filmes;
     }
@@ -34,8 +35,7 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        Filme filme = filmes.get(i);
-        myViewHolder.titulo.setText(filme.getNome());
+        myViewHolder.titulo.setText(filmes.get(i).getTituloOriginal());
     }
 
     @Override
