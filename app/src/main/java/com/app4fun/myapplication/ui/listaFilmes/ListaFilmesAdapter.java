@@ -12,17 +12,17 @@ import com.app4fun.myapplication.R;
 import com.app4fun.myapplication.data.model.Filme;
 import com.app4fun.myapplication.data.network.response.FilmesResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
 public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.MyViewHolder> {
 
-    private Context context;
-    private List<FilmesResponse> filmes;
 
-    public ListaFilmesAdapter(Context context, List<FilmesResponse> filmes) {
-        this.context = context;
-        this.filmes = filmes;
+    private List<Filme> filmes;
+
+    public ListaFilmesAdapter() {
+        filmes = new ArrayList<>();
     }
 
     @NonNull
@@ -35,7 +35,7 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.titulo.setText(filmes.get(i).getTituloOriginal());
+        myViewHolder.titulo.setText(filmes.get(i).getNome());
     }
 
     @Override
@@ -52,4 +52,10 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
             titulo = itemView.findViewById(R.id.text_filme);
         }
     }
+
+    public void setFilmes(List<Filme> filmes){
+        this.filmes = filmes;
+        notifyDataSetChanged();
+    }
+
 }
